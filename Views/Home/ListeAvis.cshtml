@@ -1,0 +1,64 @@
+﻿
+@{
+  
+}
+@model Avis;
+<head>
+    <title>Liste Avis</title>
+    <link rel="stylesheet" href="/css/formulaire.css" />
+</head>
+<body>
+    <header>
+        <img src="/img/GroupeHN.png" class="image" alt="GroupeHN" />
+        <h1>Liste des avis</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="Formulaire">Formulaire</a></li>
+        </ul>
+    </nav>
+    <section>
+        <table>
+        <thead><th colspan="3">Liste</th></thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Avis donné</th>
+        </tr>
+        @{
+            ListeAvis liste = new ListeAvis();
+            List<Avis> avisListe = new List<Avis>();
+            avisListe = liste.GetAvis("FichierXML/DataAvis.xml");
+        }
+            @foreach(Avis avis in avisListe)
+            {
+             <tr>
+                 <td>
+                     @avis.Nom
+                 </td>
+                 <td>
+                        @avis.Prenom
+                 </td>
+                    @if(avis.AvisDonne == "O")
+                    {
+                        <td class="bg-success">
+                            OUI
+                        </td>
+                    }else if(avis.AvisDonne == "N"){
+                        <td class="bg-danger">
+                            NON
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            X
+                        </td>
+                    }
+
+             </tr>
+            }
+        </table>
+    </section>
+</body>
